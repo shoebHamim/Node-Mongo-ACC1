@@ -34,7 +34,7 @@ const saveUser=async(req,res)=>{
     res.send('New User Saved!')
   }
   else{
-    res.send('Invalid Body')
+    res.send('Failed to Add! 1 or More Property Missing in the Request Body!')
   }
 }
 
@@ -53,10 +53,26 @@ const updateUser=async(req,res)=>{
     res.send('User Updated!')
   }
   else{
-    res.send('Invalid Id')
+    res.send('Invalid Id!')
   }
 }
 
+const bulkUpdateUser=async(req,res)=>{
+  let updateCount=0
+  for( user of req.body){
+    const updatingIndex=users.findIndex(elem=> elem.Id===user.Id)
+    if(updatingIndex!==-1){
+      const updatingProperties=Object.keys(user)
+      for (i of updatingProperties){
+        users[updatingIndex][i]= user[i]
+      }
+      updateCount+=1
+    } 
+  }
+  console.log(users);
+  await saveToJson(users)
+  res.send(`${updateCount} Users Updated!`)
+}
 
 const deleteUser=async(req,res)=>{
   const deletingId=req.body.Id
@@ -73,4 +89,4 @@ const deleteUser=async(req,res)=>{
 
 
 
-module.exports={randomUser,allUser,saveUser,updateUser,deleteUser}
+module.exports={randomUser,allUser,saveUser,updateUser,bulkUpdateUser,deleteUser}

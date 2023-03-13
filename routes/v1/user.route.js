@@ -13,6 +13,7 @@ router.post('/save',userControllers.saveUser)
 router.patch('/update',userControllers.updateUser)
 
 router.delete('/delete',userControllers.deleteUser)
+router.patch('/bulk-update',userControllers.bulkUpdateUser)
 
 
 module.exports=router
