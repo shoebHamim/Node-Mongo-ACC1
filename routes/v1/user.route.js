@@ -8,6 +8,9 @@ router.get('/random',userControllers.randomUser)
 // if limit=number  query is used to limit user
 router.get('/all',userControllers.allUser)
 
+router.post('/save',userControllers.saveUser)
+
+router.patch('/update',userControllers.updateUser)
 
 
 
