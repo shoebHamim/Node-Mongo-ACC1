@@ -58,6 +58,19 @@ const updateUser=async(req,res)=>{
 }
 
 
+const deleteUser=async(req,res)=>{
+  const deletingId=req.body.Id
+  const deletingIndex=users.findIndex(elem=>elem.Id===deletingId)
+  if(deletingIndex!==-1){
+    users.splice(deletingIndex,1)
+    await saveToJson(users)
+    res.send('User Deleted!')
+  }
+  else{
+    res.send('Invalid Id')
+  }
+}
 
 
-module.exports={randomUser,allUser,saveUser,updateUser}
+
+module.exports={randomUser,allUser,saveUser,updateUser,deleteUser}
